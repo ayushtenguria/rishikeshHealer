@@ -1,144 +1,79 @@
-// components/Footer.tsx
-"use client";
+import React from 'react';
+import { MapPin, Mail, Phone } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
-import React, { useEffect } from 'react';
-import Image from 'next/image';
-import { 
-  Card, 
-  CardContent 
-} from '@/components/ui/card';
-import { MapPin, Phone, Mail } from 'lucide-react';
-
-const Footer: React.FC = () => {
-  // Load Tally script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://tally.so/widgets/embed.js';
-    script.defer = true;
-    document.body.appendChild(script);
-
-    return () => {
-      // Cleanup script on unmount
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
-  // Get current year for copyright
-  const currentYear = new Date().getFullYear();
-
+const Footer = () => {
   return (
     <footer className="w-full">
-      {/* Enquiry Form & Location Section */}
-      <div className="w-full bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Enquiry Form Section */}
-            <div>
-              <h2 className="text-3xl font-bold text-purple-900 mb-4">Enquiry Form</h2>
-              <p className="text-gray-700 mb-8">
-                Please submit your inquiry using the contact form below, and we'll get in touch 
-                with details about our packages and courses via email.
-              </p>
+      {/* Map Section */}
+      <div className="w-full h-64 md:h-80 lg:h-96 relative">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.393743471815!2d77.3935!3d28.5767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM0JzM2LjEiTiA3N8KwMjMnMzYuNiJF!5e0!3m2!1sen!2sin!4v1616661262548!5m2!1sen!2sin" 
+          className="w-full h-full border-0" 
+          allowFullScreen={false} 
+          loading="lazy"
+          title="Location Map"
+        />
+      </div>
 
-              {/* Tally Form directly embedded */}
-              <div className="w-full bg-white p-4 md:p-6 rounded-lg shadow-sm">
-                <iframe
-                  src="https://tally.so/embed/YOUR_FORM_ID_HERE?alignLeft=1&hideTitle=1&transparentBackground=1"
-                  width="100%"
-                  height={450}
-                  frameBorder="0"
-                  marginHeight={0}
-                  marginWidth={0}
-                  title="Jeevatman Yogshala Enquiry Form"
-                ></iframe>
-              </div>
-            </div>
+      {/* Contact Section */}
+      <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white py-12 px-4 md:px-8">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 relative">
+            CONTACT US
+            <Separator className="w-16 h-1 bg-white mx-auto mt-3" />
+          </h2>
 
-            {/* Location Information */}
-            <div>
-              <Card className="border-0 shadow-md">
-                <CardContent className="p-8">
-                  <h2 className="text-3xl font-bold text-purple-900 mb-8 border-b pb-2">Location</h2>
-                  
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <MapPin className="h-6 w-6 text-purple-900 mt-1 flex-shrink-0" />
-                      <p className="text-gray-700">
-                        Gayatri Kunj guest house Near hotel moksha Swarg Ashram Rishikesh, Uttarakhand 249304
-                      </p>
-                    </div>
-                    
-                    <div className="flex items-center gap-4">
-                      <Phone className="h-6 w-6 text-purple-900 flex-shrink-0" />
-                      <div className="text-gray-700">
-                        <p>+91 8169145495</p>
-                        <p>+91 9324139712</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-4">
-                      <Mail className="h-6 w-6 text-purple-900 flex-shrink-0" />
-                      <a href="mailto:jeevatmanyogshala@gmail.com" className="text-gray-700 hover:text-purple-900">
-                        jeevatmanyogshala@gmail.com
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+          <div className="grid grid-cols-1 bg-white rounded-2xl md:grid-cols-3 gap-8">
+            {/* School Timing */}
+            <Card className="bg-transparent border-none shadow-none">
+              <CardContent className="flex flex-col items-center p-6">
+                <div className="bg-green-500 rounded-full p-5 mb-4">
+                  <MapPin className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">School Timing</h3>
+                <p className="text-center">09:00 AM to 4:00 PM</p>
+                <p className="text-center">Monday to Saturday</p>
+              </CardContent>
+            </Card>
+
+            {/* Address */}
+            <Card className="bg-transparent border-none shadow-none">
+              <CardContent className="flex flex-col items-center p-6">
+                <div className="bg-red-500 rounded-full p-5 mb-4">
+                  <Mail className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Address</h3>
+                <p className="text-center">Kilkari Montessori House Of Children</p>
+                <p className="text-center">House No SK-21, Ground Floor,</p>
+                <p className="text-center">Sector 116, Noida, UP 201301</p>
+              </CardContent>
+            </Card>
+
+            {/* Contact */}
+            <Card className="bg-transparent border-none shadow-none">
+              <CardContent className="flex flex-col items-center p-6">
+                <div className="bg-yellow-400 rounded-full p-5 mb-4">
+                  <Phone className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Contact</h3>
+                <p className="text-center">+91 70428 92232</p>
+                <p className="text-center">admin@kilkarimontessori.com</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
 
-      {/* Logos Section */}
-      <div className="w-full bg-white py-10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
-            <div className="w-32 h-32 relative">
-              <Image 
-                src="/images/logo-jeevatman.png" 
-                alt="Jeevatman Yogshala Logo" 
-                fill
-                style={{ objectFit: 'contain' }}
-              />
-            </div>
-            
-            <div className="w-32 h-16 relative">
-              <Image 
-                src="/images/logo-yoga-alliance.png" 
-                alt="Yoga Alliance Logo" 
-                fill
-                style={{ objectFit: 'contain' }}
-              />
-            </div>
-            
-            <div className="w-32 h-16 relative">
-              <Image 
-                src="/images/logo-trustpilot.png" 
-                alt="Trustpilot Logo" 
-                fill
-                style={{ objectFit: 'contain' }}
-              />
-            </div>
-            
-            <div className="w-32 h-16 relative">
-              <Image 
-                src="/images/logo-google-reviews.png" 
-                alt="Google Reviews Logo" 
-                fill
-                style={{ objectFit: 'contain' }}
-              />
-            </div>
+      {/* Copyright Section */}
+      <div className="bg-gray-800 text-gray-300 py-4 text-center text-sm">
+        <div className="container mx-auto">
+          <p>© {new Date().getFullYear()} Kilkari Montessori House Of Children. All rights reserved.</p>
+          <div className="flex justify-center mt-2 space-x-4">
+            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
-        </div>
-      </div>
-
-      {/* Copyright Section with Dynamic Year */}
-      <div className="w-full bg-purple-900 text-white py-4">
-        <div className="container mx-auto px-4 text-center">
-          <p>Copyright © {currentYear} Jeevatman Yogshala. All Rights Reserved</p>
         </div>
       </div>
     </footer>
